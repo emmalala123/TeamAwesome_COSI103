@@ -29,8 +29,7 @@ let checkValue = value => {
  * initial directory listing
  */
 let mainMenu = () => {
-    console.log(1 + " stang" + "\n2 quit")
-    let value = rl.question("press 1: \npress 2:")
+    let value = rl.question("stang -> press 1: \nquit -> press 2:\n")
     checkValue(+value)
 }
 
