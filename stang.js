@@ -6,7 +6,6 @@ var rl = require('readline-sync');
 console.clear()
 
 // #################################### MENU/CONSTRUCTORS #####################################################
-var options = {1: 'birthday card', 2: 'start game', 3: 'mystery'}
  
 /**
  * checking options for main menu
