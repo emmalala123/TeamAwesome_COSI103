@@ -1,0 +1,25 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "for js",
+  "main": "stang.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmalala123/TeamAwesome_COSI103.git"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "emmabarash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emmalala123/TeamAwesome_COSI103/issues"
+  },
+  "homepage": "https://github.com/emmalala123/TeamAwesome_COSI103#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
