@@ -29,7 +29,7 @@ let checkValue = value => {
  * initial directory listing
  */
 let mainMenu = () => {
-    let value = rl.question("stang -> press 1: \nquit -> press 2:\n")
+    let value = rl.question("stang -> press 1 \nquit -> press 2\n")
     checkValue(+value)
 }
 
