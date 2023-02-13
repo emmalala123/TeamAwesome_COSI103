@@ -4,4 +4,6 @@ def hello():
 	print("I totally get that, but you're doing great!")
 	print("Thanks for your help!")
 
+	print("hi again")
+
 hello()
