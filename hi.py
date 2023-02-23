@@ -5,5 +5,6 @@ def hello():
 	print("Thanks for your help!")
 
 	print("hi again :)")
+	print("hola! :D")
 
 hello()
