@@ -34,9 +34,14 @@ def index():
     print('processing / route')
     return f'''
         <h1>GPT Demo</h1>
+<<<<<<< HEAD
+        <li><a href="/about">about</a></li>
+        <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
+=======
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a> <br>
         <a href="{url_for('getResponseJames')}">Ask GPT to write a poetry </a> <br>
         <a href="{url_for('willsPage')}">Ask GPT to generate code for a game </a>
+>>>>>>> 65f4cfc2d6d663a400fe2197070aa593c6f59e2b
     '''
 
 @app.route('/about')
@@ -46,6 +51,16 @@ def about():
     return f'''
         <h1>GPT app Team 42</h1>
         this is the GPT app for team 42, which uses GPT3 to solve issues based on the preset prompts, and generate responses
+        Here is our repository for reference: <a href="https://github.com/emmalala123/TeamAwesome_COSI103/tree/2103969f715eea0d3519b1804938e662735ae770">Team42</a>
+    '''
+
+@app.route('/Emma')
+def about():
+    ''' display a link to the general query page '''
+    print('processing /about route')
+    return f'''
+        <h1> Emma </h1>
+        Hello world!
     '''
    
 
