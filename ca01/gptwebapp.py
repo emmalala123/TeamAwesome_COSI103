@@ -23,8 +23,7 @@ from gpt import GPT
 import os
 
 app = Flask(__name__)
-app.secret_key = "KEY"
-gptAPI = GPT("KEY")
+gptAPI = GPT(os.environ.get("APIKEY"))
 
 # Set the secret key to some random bytes. Keep this really secret!
 
@@ -120,7 +119,7 @@ def willsPage():
         <div style="border:thin solid black">{answer}</div>
         Here is the answer in "pre" mode:
         <pre style="border:thin solid black">{answer}</pre>
-        <a href={url_for('gptdemo')}> make another query</a>
+        <a href={url_for('index')}> make another query</a>
         '''
     else:
         return '''
