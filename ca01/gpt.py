@@ -31,11 +31,11 @@ class GPT():
         # Set up the model and prompt
         self.model_engine = "text-davinci-003"
 
-    def getResponse(self,prompt):
+    def getResponseNina(self,prompt):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
-            prompt=prompt,
+            prompt= "Checking this following python program for syntax errors" + prompt,
             max_tokens=1024,
             n=1,
             stop=None,
