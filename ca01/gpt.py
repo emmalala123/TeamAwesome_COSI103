@@ -60,11 +60,11 @@ class GPT():
         response = completion.choices[0].text
         return response
 
-    def responseEmma(self,promptEmma):
+    def getResponseEmma(self,promptEmma):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
-            prompt=prompt,
+            prompt=promptEmma,
             max_tokens=1024,
             n=1,
             stop=None,
@@ -74,7 +74,7 @@ class GPT():
         response = completion.choices[0].text
         return response
 
-  def getResponseJames(self, prompt):
+    def getResponseJames(self, prompt):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
@@ -86,6 +86,7 @@ class GPT():
         )
         response = completion.choices[0].text
         return response
+    
 if __name__=='__main__':
     '''
     '''
