@@ -45,6 +45,23 @@ class GPT():
         response = completion.choices[0].text
         return response
     
+<<<<<<< HEAD
+=======
+    def willResponse(self,prompt):
+        ''' Generate a GPT response '''
+        prompt = "Generate the python code for the following game:\n" + prompt
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt=prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+
+        response = completion.choices[0].text
+        return response
+>>>>>>> 100bf8e (added my method)
 
 if __name__=='__main__':
     '''
