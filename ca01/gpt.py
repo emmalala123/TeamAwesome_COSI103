@@ -46,7 +46,7 @@ class GPT():
         return response
     
 
-    def responseEmma(self,promptEmma):
+    def getResponseEmma(self,promptEmma):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
