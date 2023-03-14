@@ -59,7 +59,7 @@ class GPT():
         response = completion.choices[0].text
         return response
 
-    def responseEmma(self,promptEmma):
+    def responseEmma(self,prompt):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
@@ -78,4 +78,6 @@ if __name__=='__main__':
     '''
     import os
     g = GPT(os.environ.get("APIKEY"))
+    print(g.getResponse("what does openai's GPT stand for?"))
+    
     print(g.getResponse("what does openai's GPT stand for?"))
