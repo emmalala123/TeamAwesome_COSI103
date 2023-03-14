@@ -40,6 +40,7 @@ def index():
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a> <br>
         <a href="{url_for('getResponseJames')}">Ask GPT to write a poetry </a> <br>
         <a href="{url_for('willsPage')}">Ask GPT to generate code for a game </a>
+        <li><a href="/Emma"> Emma </a></li>
 
     '''
 
