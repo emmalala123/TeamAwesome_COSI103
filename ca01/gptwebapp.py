@@ -83,7 +83,7 @@ def getResponseJames():
    
     if request.method == 'POST':
         prompt = request.form['prompt']
-        answer = gptAPI.createPoetryJames(prompt)
+        answer = gptAPI.getResponseJames(prompt)
         return f'''
         <h1>GPT Demo</h1>
         <pre style="bgcolor:yellow">{prompt}</pre>
