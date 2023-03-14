@@ -44,6 +44,7 @@ class GPT():
 
         response = completion.choices[0].text
         return response
+    
 
 if __name__=='__main__':
     '''
