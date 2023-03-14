@@ -45,6 +45,7 @@ class GPT():
         response = completion.choices[0].text
         return response
     
+
     def getResponseWill(self,prompt):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
@@ -63,7 +64,7 @@ class GPT():
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
-            prompt=prompt,
+            prompt=promptEmma,
             max_tokens=1024,
             n=1,
             stop=None,
@@ -73,6 +74,19 @@ class GPT():
         response = completion.choices[0].text
         return response
 
+    def getResponseJames(self, prompt):
+        ''' Generate a GPT response '''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt="create a poem based on the word" + prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+        response = completion.choices[0].text
+        return response
+    
 if __name__=='__main__':
     '''
     '''

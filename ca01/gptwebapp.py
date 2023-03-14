@@ -23,8 +23,8 @@ from gpt import GPT
 import os
 
 app = Flask(__name__)
-app.secret_key = "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"
-gptAPI = GPT("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")
+app.secret_key = "KEY"
+gptAPI = GPT("KEY")
 
 # Set the secret key to some random bytes. Keep this really secret!
 
@@ -35,8 +35,14 @@ def index():
     print('processing / route')
     return f'''
         <h1>GPT Demo</h1>
+<<<<<<< HEAD
         <li><a href="/about">about</a></li>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
+=======
+        <a href="{url_for('gptdemo')}">Ask questions to GPT</a> <br>
+        <a href="{url_for('getResponseJames')}">Ask GPT to write a poetry </a> <br>
+        <a href="{url_for('willsPage')}">Ask GPT to generate code for a game </a>
+>>>>>>> 65f4cfc2d6d663a400fe2197070aa593c6f59e2b
     '''
 
 @app.route('/about')
@@ -81,6 +87,60 @@ def gptdemo():
         return '''
         <h1>GPT Demo App</h1>
         Enter your query below
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+    
+'''create a poem based on the topic of the user's choice'''
+@app.route('/getResponseJames', methods=['GET', 'POST'])
+def getResponseJames():
+   
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.getResponseJames(prompt)
+        return f'''
+        <h1>GPT Demo</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('gptpoetry')}> make another query</a>
+        '''
+    else:
+        return '''
+        <h1>Generate Poetry</h1>
+        Enter the topic of your choice below, and GPT would generate a poem for you
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+    
+'''create a poem based on the topic of the user's choice'''
+@app.route('/willsPage', methods=['GET', 'POST'])
+def willsPage():
+   
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.getResponseWill(prompt)
+        return f'''
+        <h1>GPT Demo</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('gptdemo')}> make another query</a>
+        '''
+    else:
+        return '''
+        <h1>Generate Poetry</h1>
+        Type the name of a simple game, and GPT will generate the python code for it
         <form method="post">
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">
