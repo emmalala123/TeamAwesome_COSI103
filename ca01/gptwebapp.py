@@ -23,8 +23,8 @@ from gpt import GPT
 import os
 
 app = Flask(__name__)
-app.secret_key = "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"
-gptAPI = GPT("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")
+app.secret_key = "KEY"
+gptAPI = GPT("KEY")
 
 # Set the secret key to some random bytes. Keep this really secret!
 
@@ -35,7 +35,8 @@ def index():
     print('processing / route')
     return f'''
         <h1>GPT Demo</h1>
-        <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
+        <a href="{url_for('gptdemo')}">Ask questions to GPT</a> <br>
+        <a href="{url_for('getResponseJames')}">Ask GPT to write a poetry </a>
     '''
 
 @app.route('/about')
@@ -75,7 +76,33 @@ def gptdemo():
             <p><input type=submit value="get response">
         </form>
         '''
-
+    
+'''create a poem based on the topic of the user's choice'''
+@app.route('/getResponseJames', methods=['GET', 'POST'])
+def getResponseJames():
+   
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.createPoetryJames(prompt)
+        return f'''
+        <h1>GPT Demo</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('gptpoetry')}> make another query</a>
+        '''
+    else:
+        return '''
+        <h1>Generate Poetry</h1>
+        Enter the topic of your choice below, and GPT would generate a poem for you
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
     app.run(debug=True,port=5001)
