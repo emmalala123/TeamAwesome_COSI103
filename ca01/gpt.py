@@ -31,7 +31,36 @@ class GPT():
         # Set up the model and prompt
         self.model_engine = "text-davinci-003"
 
-    def getResponse(self,prompt):
+    def getResponseNina(self,prompt):
+        ''' Generate a GPT response '''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt= "Checking this following python program for syntax errors" + prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+
+        response = completion.choices[0].text
+        return response
+    
+
+    def getResponseWill(self,prompt):
+        ''' Generate a GPT response '''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt= "Generate the python code for the following game:" + prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+
+        response = completion.choices[0].text
+        return response
+
+    def responseEmma(self,promptEmma):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
@@ -44,8 +73,8 @@ class GPT():
 
         response = completion.choices[0].text
         return response
-    
-    def getResponseJames(self, prompt):
+
+  def getResponseJames(self, prompt):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
