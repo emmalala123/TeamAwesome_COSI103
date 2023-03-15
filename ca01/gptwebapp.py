@@ -35,12 +35,24 @@ def index():
     return f'''
         <h1>GPT Demo</h1>
         <li><a href="/about">about</a></li>
-        <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
+        <a href="{url_for('ourTeam')}">our team</a> <br>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a> <br>
         <a href="{url_for('getResponseJames')}">Ask GPT to write a poetry </a> <br>
         <a href="{url_for('willsPage')}">Ask GPT to generate code for a game </a>
         <li><a href="/Emma"> Emma </a></li>
 
+    '''
+
+@app.route('/ourTeam')
+def ourTeam():
+    ''' display our team members '''
+    print('processing /ourTeam route')
+    return f'''
+        <h1>Our Team</h1>
+        <li>Emma Barash</li>
+        <li>Nina Zhang</li>
+        <li>James Wang</li>
+        <li>William Messenger</li>
     '''
 
 @app.route('/about')
@@ -49,12 +61,12 @@ def about():
     print('processing /about route')
     return f'''
         <h1>GPT app Team 42</h1>
-        this is the GPT app for team 42, which uses GPT3 to solve issues based on the preset prompts, and generate responses
+        this is the GPT app for team 42, which uses GPT3 to solve issues based on the preset prompts, and generate responses<br>
         Here is our repository for reference: <a href="https://github.com/emmalala123/TeamAwesome_COSI103/tree/2103969f715eea0d3519b1804938e662735ae770">Team42</a>
     '''
 
 @app.route('/Emma')
-def about():
+def Emma():
     ''' display a link to the general query page '''
     print('processing /about route')
     return f'''
@@ -106,7 +118,7 @@ def getResponseJames():
         <div style="border:thin solid black">{answer}</div>
         Here is the answer in "pre" mode:
         <pre style="border:thin solid black">{answer}</pre>
-        <a href={url_for('gptpoetry')}> make another query</a>
+        <a href={url_for('getResponseJames')}> make another query</a>
         '''
     else:
         return '''
@@ -118,7 +130,7 @@ def getResponseJames():
         </form>
         '''
     
-'''create a poem based on the topic of the user's choice'''
+'''create a python game based on the user's choice'''
 @app.route('/willsPage', methods=['GET', 'POST'])
 def willsPage():
    
@@ -133,12 +145,12 @@ def willsPage():
         <div style="border:thin solid black">{answer}</div>
         Here is the answer in "pre" mode:
         <pre style="border:thin solid black">{answer}</pre>
-        <a href={url_for('index')}> make another query</a>
+        <a href={url_for('willsPage')}> make another game</a>
         '''
     else:
         return '''
-        <h1>Generate Poetry</h1>
-        Type the name of a simple game, and GPT will generate the python code for it
+        <h1>Make a Game</h1>
+        Type the name of a simple game, and GPT will generate the python code for it:
         <form method="post">
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">
