@@ -61,9 +61,9 @@ def ourTeam():
         </ul>
         <h3>Nina Zhang</h3>
         <ul>
-            <li>Graduation Year: </li>
-            <li>Major: </li>
-            <li>Role: </li>
+            <li>Graduation Year: 2024 </li>
+            <li>Major: Computer Science, Biology </li>
+            <li>Role: Created <a href="/ninaPage">python checker</a> from prompt</li> 
         </ul>
         <h3>James Wang</h3>
         <ul>
@@ -99,7 +99,6 @@ def Emma():
         <h2> Emma </h2>
         Hello world!
     '''
-   
 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
@@ -160,6 +159,34 @@ def getResponseJames():
         </form>
         '''
     
+'''proofreads code of the user's choice'''
+@app.route('/ninaPage', methods=['GET', 'POST'])
+def ninaPage(): 
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.getResponseNina(prompt)
+        return f'''
+        <h1><a href="/">GPT Prompt Engineering</a></h1>
+        <h2>Proofread Input Code</h2>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href="/ninaPage"> make another query</a>
+        '''
+    else:
+        return '''
+        <h1><a href="/">GPT Prompt Engineering</a></h1>
+        <h2>Proofread Input Code</h2>
+        Input the code you want to check and proofread, and GPT will check the code for errors.
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+
 '''create a python game based on the user's choice'''
 @app.route('/willsPage', methods=['GET', 'POST'])
 def willsPage():
@@ -188,7 +215,13 @@ def willsPage():
             <p><input type=submit value="get response">
         </form>
         '''
-
+    
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
     app.run(debug=True,port=5001)
+    
+
+
+
+
+
