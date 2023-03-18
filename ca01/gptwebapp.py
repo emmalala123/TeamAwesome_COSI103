@@ -39,7 +39,7 @@ def index():
         <ul>
             <li><a href="/about">About</a></li>
             <li><a href="/ourTeam">Our Team</a> </li>
-            <li><a href="/gptdemo">Ask questions to GPT</a> </li>
+            <li><a href="/ninaPage">Ask GPT to proofread your code</a> </li>
             <li><a href="/getResponseJames">Ask GPT to write a poetry</a></li>
             <li><a href="/willsPage">Ask GPT to generate code for a game</a></li>
             <li><a href="/Emma"> Emma </a></li>
@@ -99,36 +99,6 @@ def Emma():
         <h2> Emma </h2>
         Hello world!
     '''
-
-@app.route('/gptdemo', methods=['GET', 'POST'])
-def gptdemo():
-    ''' handle a get request by sending a form 
-        and a post request by returning the GPT response
-    '''
-    if request.method == 'POST':
-        prompt = request.form['prompt']
-        answer = gptAPI.getResponse(prompt)
-        return f'''
-        <h1><a href="/">GPT Prompt Engineering</a></h1>
-        <h2>GPT Demo</h2>
-        <pre style="bgcolor:yellow">{prompt}</pre>
-        <hr>
-        Here is the answer in text mode:
-        <div style="border:thin solid black">{answer}</div>
-        Here is the answer in "pre" mode:
-        <pre style="border:thin solid black">{answer}</pre>
-        <a href="/gptdemo"> make another query</a>
-        '''
-    else:
-        return '''
-        <h1><a href="/">GPT Prompt Engineering</a></h1>
-        <h2>GPT Demo App</h2>
-        Enter your query below
-        <form method="post">
-            <textarea name="prompt"></textarea>
-            <p><input type=submit value="get response">
-        </form>
-        '''
     
 '''create a poem based on the topic of the user's choice'''
 @app.route('/getResponseJames', methods=['GET', 'POST'])
