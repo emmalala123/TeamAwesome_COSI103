@@ -92,7 +92,7 @@ def about():
     '''
 
 # create a CSS file based on a color scheme of the user's choice
-@app.route('/emmaPage')
+@app.route('/emmaPage', methods=['GET', 'POST'])
 def emmaPage():
     ''' display a link to the general query page '''
     css_url = url_for('static', filename='styles.css')
@@ -109,7 +109,7 @@ def emmaPage():
             <div>{answer}</div>
             Here is the answer in "pre" mode:
             <pre>{answer}</pre>
-            <a href="/getresponseEmma"> make another query</a>
+            <a href="/emmaPage"> make another query</a>
             '''
     else:
         return f'''
