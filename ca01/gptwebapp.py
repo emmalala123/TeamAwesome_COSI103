@@ -22,7 +22,7 @@ from flask import request,redirect,url_for,Flask
 from gpt import GPT
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 gptAPI = GPT(os.environ.get("APIKEY"))
 
 # Set the secret key to some random bytes. Keep this really secret!
@@ -42,8 +42,9 @@ def index():
             <li><a href="/ninaPage">Ask GPT to proofread your code</a> </li>
             <li><a href="/getResponseJames">Ask GPT to write a poetry</a></li>
             <li><a href="/willsPage">Ask GPT to generate code for a game</a></li>
-            <li><a href="/Emma"> Emma </a></li>
+            <li><a href="/emmaPage"> Ask GPT to generate a CSS file with chosen color theme</a></li>
         </ul>
+
     '''
 
 @app.route('/ourTeam')
@@ -55,9 +56,9 @@ def ourTeam():
         <h2>Our Team</h2>
         <h3>Emma Barash</h3>
         <ul>
-            <li>Graduation Year: </li>
-            <li>Major: </li>
-            <li>Role: </li>
+            <li>Graduation Year: 2023</li>
+            <li>Major: BS/MS Neuroscience, BA Computer Science</li>
+            <li>Role: Created <a href="/emmaPage">CSS color-theme generator</a></li>
         </ul>
         <h3>Nina Zhang</h3>
         <ul>
@@ -90,15 +91,37 @@ def about():
         Click <a href="https://github.com/emmalala123/TeamAwesome_COSI103/tree/2103969f715eea0d3519b1804938e662735ae770">here</a> to view our repository for reference. 
     '''
 
-@app.route('/Emma')
-def Emma():
+# create a CSS file based on a color scheme of the user's choice
+@app.route('/emmaPage')
+def emmaPage():
     ''' display a link to the general query page '''
-    print('processing /about route')
-    return f'''
-        <h1><a href="/">GPT Prompt Engineering</a></h1>
-        <h2> Emma </h2>
-        Hello world!
-    '''
+    css_url = url_for('static', filename='styles.css')
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.getresponseEmma(prompt)
+        return f'''
+            <link rel="stylesheet" type="text/css" href="{css_url}">
+            <h1><a href="/">GPT Prompt Engineering</a></h1>
+            <h2> Generate Cascading Style Sheet (CSS)</h2>
+            <pre>{prompt}</pre>
+            <hr>
+            Here is the answer in text mode:
+            <div>{answer}</div>
+            Here is the answer in "pre" mode:
+            <pre>{answer}</pre>
+            <a href="/getresponseEmma"> make another query</a>
+            '''
+    else:
+        return f'''
+            <link rel="stylesheet" type="text/css" href="{css_url}">
+            <h1><a href="/">GPT Prompt Engineering</a></h1>
+            <h2> Generate Cascading Style Sheet (CSS)</h2>
+          Please choose a color theme, and GPT would generate CSS for you
+        <form method="post" class="my-form">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response" class="btn-primary">
+        </form>
+        '''
     
 '''create a poem based on the topic of the user's choice'''
 @app.route('/getResponseJames', methods=['GET', 'POST'])

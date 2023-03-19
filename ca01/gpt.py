@@ -60,11 +60,11 @@ class GPT():
         response = completion.choices[0].text
         return response
 
-    def responseEmma(self,prompt):
+    def getresponseEmma(self,prompt):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
-            prompt=prompt,
+            prompt="Please generate a CSS file for the following color scheme: " + prompt,
             max_tokens=1024,
             n=1,
             stop=None,
