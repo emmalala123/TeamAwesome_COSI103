@@ -116,7 +116,7 @@ def emmaPage():
             <link rel="stylesheet" type="text/css" href="{css_url}">
             <h1><a href="/">GPT Prompt Engineering</a></h1>
             <h2> Generate Cascading Style Sheet (CSS)</h2>
-          Please choose a color theme, and GPT would generate CSS for you
+          Please choose a color theme, and GPT will generate CSS for you
         <form method="post" class="my-form">
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response" class="btn-primary">
