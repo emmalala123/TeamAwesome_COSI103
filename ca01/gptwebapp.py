@@ -67,9 +67,9 @@ def ourTeam():
         </ul>
         <h3>James Wang</h3>
         <ul>
-            <li>Graduation Year: </li>
-            <li>Major: </li>
-            <li>Role: </li>
+            <li>Graduation Year: 2025 </li>
+            <li>Major: Business, Computer Science</li>
+            <li>Role: Created <a href="/getResponseJames">Ask GPT to write a poetry</a></li>
         </ul>
         <h3>William Messenger</h3>
         <ul>
