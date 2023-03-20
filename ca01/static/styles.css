@@ -40,3 +40,10 @@ a:hover {
 .btn-primary:focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 167, 225, 0.5);
 }
+
+.answer-div {
+  text-align: left;
+}
+.answer-pre {
+  text-align: left;
+}

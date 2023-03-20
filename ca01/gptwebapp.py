@@ -105,10 +105,10 @@ def emmaPage():
             <h2> Generate Cascading Style Sheet (CSS)</h2>
             <pre>{prompt}</pre>
             <hr>
-            Here is the answer in text mode:
-            <div>{answer}</div>
-            Here is the answer in "pre" mode:
-            <pre>{answer}</pre>
+            <p class="answer">Here is the answer in text mode:</p>
+            <div class="answer-div">{answer}</div>
+            <p class="answer">Here is the answer in "pre" mode:</p>
+            <pre class="answer-pre">{answer}</pre>
             <a href="/emmaPage"> make another query</a>
             '''
     else:
@@ -116,7 +116,7 @@ def emmaPage():
             <link rel="stylesheet" type="text/css" href="{css_url}">
             <h1><a href="/">GPT Prompt Engineering</a></h1>
             <h2> Generate Cascading Style Sheet (CSS)</h2>
-          Please choose a color theme, and GPT will generate CSS for you
+          Please choose a color theme, and GPT will generate a .css file for you
         <form method="post" class="my-form">
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response" class="btn-primary">
