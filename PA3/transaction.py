@@ -1,1 +1,2 @@
-class transaction(): 
+class Transaction: 
+  
