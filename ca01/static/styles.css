@@ -1,0 +1,51 @@
+body {
+  background-color: #1c1c1c;
+  color: #fff;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #00a7e1;
+}
+
+a {
+  color: #00a7e1;
+}
+
+a:hover {
+  color: #fff;
+}
+
+.my-form{
+  margin-top: 5%;
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  background-color: #00a7e1;
+  border-color: #00a7e1;
+}
+
+.btn-primary:hover {
+  background-color: #0077b5;
+  border-color: #0077b5;
+}
+
+.btn-primary:active {
+  background-color: #00507d;
+  border-color: #00507d;
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 167, 225, 0.5);
+}
+
+.answer-div {
+  text-align: left;
+  margin: 5% 10% 10%;
+}
+.answer-pre {
+  text-align: left;
+  margin: 5% 10%;
+}
