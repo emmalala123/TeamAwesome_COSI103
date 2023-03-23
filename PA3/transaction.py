@@ -19,8 +19,14 @@ class Transaction():
     def show_all(self):
         ''' create a todo item and add it to the todo table '''
         return self.runQuery("SELECT rowid,* FROM transactions",())
-
-
+    
+    def delete(self,num):
+        '''delete a item from the table'''
+        return self.runQuery("DELETE FROM transactions WHERE rowid = ?",(num,))
+    def summarize_by_date(self,item):
+        '''summarize the transactions by date'''
+        return self.runQuery("SELECT date, sum(amount) FROM transactions GROUP BY date",())
+    
     def runQuery(self,query,tuple):
         ''' return all of the uncompleted tasks as a list of dicts.'''
         con= sqlite3.connect('transaction.db')
