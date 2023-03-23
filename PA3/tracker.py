@@ -31,7 +31,7 @@ def process_args(arglist):
          if len(arglist)!=5:
              print_usage()
          else:   
-            transaction = {'title':arglist[1],'desc':arglist[2],'completed':0}
+            transaction = {'amount':arglist[1],'category':arglist[2],'date':arglist[3],'description: 'arglist[4]}
             db.add(transaction)
     elif arglist[0]=="3":
         db.delete(arglist[1])
