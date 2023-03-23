@@ -27,6 +27,10 @@ class Transaction():
         '''summarize the transactions by date'''
         return self.runQuery("SELECT date, sum(amount) FROM transactions GROUP BY date",())
     
+    def summarize_by_month(self,item):
+        '''summarize the transactions by month'''
+        return self.runQuery("SELECT month, sum(amount) FROM transactions GROUP BY month",())
+    
     def runQuery(self,query,tuple):
         ''' return all of the uncompleted tasks as a list of dicts.'''
         con= sqlite3.connect('transaction.db')
