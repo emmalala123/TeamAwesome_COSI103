@@ -39,7 +39,11 @@ def process_args(arglist):
 
 if __name__ == "__main__":
 
+    # allows user to interface with the main menu
     print_usage()
+
+    # this while loop breaks as soon as the quit() function called by a user-input of "0" is used.
     while True:
-        arglist = input("\n please input choice:")
+        # prompts user to input a choice from the menu and creates a list from white-space in args.
+        arglist = input("\n please input choice:").split()
         process_args(arglist)
