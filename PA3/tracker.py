@@ -97,16 +97,6 @@ def toplevel():
         process_args(args)
         print('-'*80+'\n'*3)
 
-toplevel()
-
 
 if __name__ == "__main__":
-
-    # allows user to interface with the main menu
-    print_usage()
-
-    # this while-loop breaks as soon as the quit() function is called by user-input of "0"
-    while True:
-        # prompts user to input a choice from the menu and creates a list from white-space in arglist
-        arglist = input("\n please input choice:").split()
-        process_args(arglist)
+    toplevel()
