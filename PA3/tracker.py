@@ -1,7 +1,12 @@
-from transaction import Transaction
+'''This program uses the Transaction class to track transactions,
+summarize them, and print them out. It tracks the amount, category,
+date, and description of each transaction. It can also summarize
+transactions by day, month, year, or category. It can also add, show, and delete
+transactions.'''
+
 import sys
 from datetime import datetime
-
+from transaction import Transaction
 
 def print_usage():
     ''' print an explanation of how to use this command '''
@@ -24,70 +29,60 @@ def print_transactions(transactions):
         print('no transactions to print')
         return
     print('\n')
-    print("%-5s %-10s %-15s %-20s %-30s"%('#','amount','category','date','description'))
+    print("#\tamount\tcategory\tdate\t\t\tdescription")
     print('-'*80)
     for item in transactions:
         values = tuple(item.values()) #(rowid,title,desc,completed)
-        print("%-5s %-10s %-15s %-20s %-30s"%values)
+        print(f"{values[0]}\t{values[1]}\t{values[2]}\t\t{values[3]}\t{values[4]}")
 
-def process_args(arglist):
-    db = Transaction()
-    db.show_all()
+def process_crud_args(arglist):
+    ''' process the command line arguments '''
+    database = Transaction()
+    database.show_all()
     if arglist==[]:
         print_usage()
 
     # show transactions
     elif arglist[0]=="1":
-        print_transactions(db.show_all())
+        print_transactions(database.show_all())
 
     # add transaction
     elif arglist[0]=="2":
         date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')  #"2022-11-09 01:34:38"
         transaction = {'amount':arglist[1],'category':arglist[2],
                        'date':date,'description':arglist[3]}
-        db.add(transaction)
+        database.add(transaction)
 
     # delete transaction
     elif arglist[0]=="3":
         if len(arglist)!= 2:
             print_usage()
         else:
-            db.delete(arglist[1])
-
-    # summarize by day
-    elif arglist[0]=="4":
-        if len(arglist)!= 2:
-            print_usage()
-        else:
-            print_transactions(db.summarize_by_day(arglist[1]))
-
-    # summarize by month
-    elif arglist[0]=="5":
-        if len(arglist)!= 2:
-            print_usage()
-        else:
-            print_transactions(db.summarize_by_month(arglist[1]))
-
-    # summarize by year
-    elif arglist[0]=="6":
-        if len(arglist)!= 2:
-            print_usage()
-        else:
-            print_transactions(db.summarize_by_year(arglist[1]))
-
-    # summarize by category
-    elif arglist[0]=="7":
-        if len(arglist)!= 2:
-            print_usage()
-        else:
-            print_transactions(db.summarize_by_category(arglist[1]))
-
-    # print usage
-    elif arglist[0]=="8":
-        print_usage()
+            database.delete(arglist[1])
 
     else:
-        print(arglist,"is not implemented")
+        process_summary_args(arglist, database)
+
+def process_summary_args(arglist, database):
+    ''' process the summary command line arguments '''
+    # summarize by day
+    if arglist[0]=="4" and len(arglist)== 2:
+        print_transactions(database.summarize_by_day(arglist[1]))
+
+    # summarize by month
+    elif arglist[0]=="5" and len(arglist)== 2:
+        print_transactions(database.summarize_by_month(arglist[1]))
+
+    # summarize by year
+    elif arglist[0]=="6" and len(arglist)== 2:
+        print_transactions(database.summarize_by_year(arglist[1]))
+
+    # summarize by category
+    elif arglist[0]=="7" and len(arglist)== 2:
+        print_transactions(database.summarize_by_category(arglist[1]))
+
+    # print usage
+    else:
         print_usage()
 
 def toplevel():
@@ -99,7 +94,7 @@ def toplevel():
 
         # add
         if args[0]=='0' or args[0]=='quit':
-            quit()
+            sys.exit()
         if args[0]=='':
             args[0]='8'
         if args[0]=='2':
@@ -109,7 +104,7 @@ def toplevel():
             # join everyting after the name as a string
             else:
                 args = ['2',args[1],args[2]," ".join(args[3:])]
-        process_args(args)
+        process_crud_args(args)
         print('-'*80+'\n'*3)
 
 if __name__ == "__main__":
