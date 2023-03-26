@@ -10,9 +10,6 @@ def toDict(t):
 class Transaction(): 
 
     def __init__(self): 
-        # self.runQuery('''CREATE TABLE IF NOT EXISTS transactions 
-        # (amount int, category text, date text, description text)''',())
-        self.db_name = f"transactions_{time.time()}.db"
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions 
         (amount int, category text, date text, description text)''',())
 
@@ -35,6 +32,14 @@ class Transaction():
     def summarize_by_month(self,month):
         '''summarize the transactions by month'''
         return self.runQuery("SELECT rowid,* FROM transactions WHERE STRFTIME('%m', date) = ?",(month,))
+    
+    def summarize_by_year(self,year):
+        '''summarize the transactions by year'''
+        return self.runQuery("SELECT rowid,* FROM transactions WHERE STRFTIME('%Y', date) = ?",(year,))
+    
+    def summarize_by_category(self,category):
+        '''summarize the transactions by category'''
+        return self.runQuery("SELECT rowid,* FROM transactions WHERE category = ?", (category,))
     
     def delete_all(self):
         '''delete all items from the table'''

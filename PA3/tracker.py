@@ -67,6 +67,20 @@ def process_args(arglist):
         else:
             print_transactions(db.summarize_by_month(arglist[1]))
 
+    # summarize by year
+    elif arglist[0]=="6":
+        if len(arglist)!= 2:
+            print_usage()
+        else:
+            print_transactions(db.summarize_by_year(arglist[1]))
+
+    # summarize by category
+    elif arglist[0]=="7":
+        if len(arglist)!= 2:
+            print_usage()
+        else:
+            print_transactions(db.summarize_by_category(arglist[1]))
+
     # print usage
     elif arglist[0]=="8":
         print_usage()
