@@ -1,9 +1,72 @@
+# test_transactions.py
+import sqlite3
+import os
 from transaction import Transaction
 
+# Test the Transaction class
+class TestTransaction:
 
-def test_add():
-    t1 = Transaction()
-    (t1.add({'amount': 100, 'category': 'food', 'date': '2019-01-01', 'description': 'groceries'}))
-    print("t1", t1.show_all())
-    ans1 = {'amount': 100, 'category': 'food', 'date': '2019-01-01', 'description': 'groceries'}
-    assert ans1 == t1
+    @classmethod
+    def setup_class(cls):
+        # Set up a test database
+        cls.db_file = 'test_transaction.db'
+        cls.db = sqlite3.connect(cls.db_file)
+        cls.db.execute('CREATE TABLE IF NOT EXISTS transactions (amount int, category text, date text, description text)')
+
+    @classmethod
+    def teardown_class(cls):
+        # Remove the test database file
+        cls.db.close()
+        os.remove(cls.db_file)
+
+    def setup_method(self):
+        # Create a new Transaction instance for each test
+        self.transaction = Transaction()
+
+        # must refresh database for tests to be accurate
+        self.transaction.delete_all()
+
+    def test_add_transaction(self):
+        # Test adding a transaction
+        item = {'amount': 100, 'category': 'food', 'date': '2023-03-25', 'description': 'groceries'}
+        self.transaction.add(item)
+        result = self.transaction.show_all()
+        print(len(result))
+        # assert result[0]['amount'] == item['amount']
+        assert result[0]['amount'] == item['amount']
+        assert result[0]['category'] == item['category']
+        assert result[0]['date'] == item['date']
+        assert result[0]['description'] == item['description']
+
+    def test_delete_transaction(self):
+        # Test deleting a transaction
+        item = {'amount': 100, 'category': 'food', 'date': '2023-03-25', 'description': 'groceries'}
+        self.transaction.add(item)
+        result = self.transaction.show_all()
+        assert len(result) == 1
+        num = result[0]['item_num']
+        self.transaction.delete(num)
+        result = self.transaction.show_all()
+        assert len(result) == 0
+
+    def test_summarize_by_day(self):
+        # Test summarizing transactions by day
+        item1 = {'amount': 100, 'category': 'food', 'date': '2023-03-25', 'description': 'groceries'}
+        item2 = {'amount': 200, 'category': 'clothing', 'date': '2023-03-25', 'description': 'new shirt'}
+        self.transaction.add(item1)
+        self.transaction.add(item2)
+        result = self.transaction.summarize_by_day('25')
+        assert len(result) == 2
+        assert result[0]['amount'] == item1['amount']
+        assert result[1]['amount'] == item2['amount']
+
+    def test_summarize_by_month(self):
+        # Test summarizing transactions by month
+        item1 = {'amount': 100, 'category': 'food', 'date': '2023-03-25', 'description': 'groceries'}
+        item2 = {'amount': 200, 'category': 'clothing', 'date': '2023-03-30', 'description': 'new shirt'}
+        self.transaction.add(item1)
+        self.transaction.add(item2)
+        result = self.transaction.summarize_by_month('03')
+        assert len(result) == 2
+        assert result[0]['amount'] == item1['amount']
+        assert result[1]['amount'] == item2['amount']

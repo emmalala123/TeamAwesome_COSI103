@@ -1,4 +1,5 @@
 import sqlite3 
+import time
 import os
 
 def toDict(t):
@@ -9,6 +10,9 @@ def toDict(t):
 class Transaction(): 
 
     def __init__(self): 
+        # self.runQuery('''CREATE TABLE IF NOT EXISTS transactions 
+        # (amount int, category text, date text, description text)''',())
+        self.db_name = f"transactions_{time.time()}.db"
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions 
         (amount int, category text, date text, description text)''',())
 
@@ -31,6 +35,10 @@ class Transaction():
     def summarize_by_month(self,month):
         '''summarize the transactions by month'''
         return self.runQuery("SELECT rowid,* FROM transactions WHERE STRFTIME('%m', date) = ?",(month,))
+    
+    def delete_all(self):
+        '''delete all items from the table'''
+        return self.runQuery("DELETE FROM transactions", ())
     
     def runQuery(self,query,tuple):
         ''' return all of the uncompleted tasks as a list of dicts.'''

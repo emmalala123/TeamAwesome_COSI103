@@ -84,7 +84,7 @@ def toplevel():
         
         # add
         if args[0]=='0' or args[0]=='quit':
-            break
+            quit()
         if args[0]=='':
             args[0]='8'
         if args[0]=='2':
@@ -96,6 +96,7 @@ def toplevel():
                 args = ['2',args[1],args[2]," ".join(args[3:])]
         process_args(args)
         print('-'*80+'\n'*3)
+
 
 
 if __name__ == "__main__":
