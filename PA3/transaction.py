@@ -9,7 +9,8 @@ def toDict(t):
 
 class Transaction(): 
 
-    def __init__(self): 
+    def __init__(self, db_name = 'transaction.db'): 
+        self.db_name = db_name
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions 
         (amount int, category text, date text, description text)''',())
 
@@ -45,11 +46,19 @@ class Transaction():
         '''delete all items from the table'''
         return self.runQuery("DELETE FROM transactions", ())
     
-    def runQuery(self,query,tuple):
-        ''' return all of the uncompleted tasks as a list of dicts.'''
-        con= sqlite3.connect('transaction.db')
+    # def runQuery(self,query,tuple):
+    #     ''' return all of the uncompleted tasks as a list of dicts.'''
+    #     con= sqlite3.connect('transaction.db')
+    #     cur = con.cursor() 
+    #     cur.execute(query,tuple)
+    #     tuples = cur.fetchall()
+    #     con.commit()
+    #     con.close()
+    #     return [toDict(t) for t in tuples]
+    def runQuery(self, query, tuple):
+        con = sqlite3.connect(self.db_name)
         cur = con.cursor() 
-        cur.execute(query,tuple)
+        cur.execute(query, tuple)
         tuples = cur.fetchall()
         con.commit()
         con.close()

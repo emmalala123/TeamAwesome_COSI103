@@ -7,13 +7,21 @@ from transaction import Transaction
 class TestTransaction:
 
     @classmethod
-    def teardown_class(self):
-        self.transaction = Transaction()
-        self.transaction.delete_all()
+    def setup_class(cls):
+        # Set up a test database
+        cls.db_file = 'test_transaction.db'
+        cls.db = sqlite3.connect(cls.db_file)
+        cls.db.execute('CREATE TABLE IF NOT EXISTS transactions (amount int, category text, date text, description text)')
+
+    @classmethod
+    def teardown_class(cls):
+        # Remove the test database file
+        cls.db.close()
+        os.remove(cls.db_file)
 
     def setup_method(self):
         # Create a new Transaction instance for each test
-        self.transaction = Transaction()
+        self.transaction = Transaction("test_transaction.db")
 
         # must refresh database for tests to be accurate
         self.transaction.delete_all()
