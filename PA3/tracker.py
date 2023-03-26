@@ -5,7 +5,7 @@ from datetime import datetime
 
 def print_usage():
     ''' print an explanation of how to use this command '''
-    print('''usage:   
+    print('''usage:
         0. quit                                 (0)
         1. show transactions                    (1)
         2. add transaction                      (2 amount category description)
@@ -17,7 +17,7 @@ def print_usage():
         8. print this menu                      (8)
         '''
             )
-    
+
 def print_transactions(transactions):
     ''' print the todo items '''
     if len(transactions)==0:
@@ -35,15 +35,16 @@ def process_args(arglist):
     db.show_all()
     if arglist==[]:
         print_usage()
-    
+
     # show transactions
     elif arglist[0]=="1":
-       print_transactions(db.show_all())
+        print_transactions(db.show_all())
 
     # add transaction
     elif arglist[0]=="2":
         date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')  #"2022-11-09 01:34:38"
-        transaction = {'amount':arglist[1],'category':arglist[2],'date':date,'description':arglist[3]}
+        transaction = {'amount':arglist[1],'category':arglist[2],
+                       'date':date,'description':arglist[3]}
         db.add(transaction)
 
     # delete transaction
@@ -95,7 +96,7 @@ def toplevel():
     args = []
     while args!=['']:
         args = input("command> ").split(' ')
-        
+
         # add
         if args[0]=='0' or args[0]=='quit':
             quit()
@@ -110,8 +111,6 @@ def toplevel():
                 args = ['2',args[1],args[2]," ".join(args[3:])]
         process_args(args)
         print('-'*80+'\n'*3)
-
-
 
 if __name__ == "__main__":
     toplevel()
