@@ -1,68 +1,74 @@
-import sqlite3 
-import time
-import os
+''' This class represents a database of transactions. It can add, show, and delete
+    transactions. It can also summarize transactions by day, month, year, and category.'''
 
-def toDict(t):
+import sqlite3
+
+def to_dict(transactions):
     ''' t is a tuple (rowid, amount, category, date, description)'''
-    todo = {'item_num':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description':t[4]}
-    return todo
+    t_dict = {'item_num':transactions[0], 'amount':transactions[1],
+            'category':transactions[2], 'date':transactions[3], 'description':transactions[4]}
+    return t_dict
 
-class Transaction(): 
-
-    def __init__(self, db_name = 'transaction.db'): 
+class Transaction():
+    ''' class to manage the transaction table'''
+    def __init__(self, db_name = 'transaction.db'):
+        ''' initialize the database'''
         self.db_name = db_name
-        self.runQuery('''CREATE TABLE IF NOT EXISTS transactions 
+        self.run_query('''CREATE TABLE IF NOT EXISTS transactions
         (amount int, category text, date text, description text)''',())
 
     def add(self,item):
         ''' create a todo item and add it to the todo table '''
-        return self.runQuery("INSERT INTO transactions VALUES(?,?,?,?)",(item['amount'],item['category'],item['date'],item['description']))
+        return self.run_query("INSERT INTO transactions VALUES(?,?,?,?)",(item['amount'],
+                            item['category'],item['date'],item['description']))
 
     def show_all(self):
         ''' create a todo item and add it to the todo table '''
-        return self.runQuery("SELECT rowid,amount,category,date,description FROM transactions",())
-    
+        return self.run_query("SELECT rowid,amount,category,date,description FROM transactions",())
+
     def delete(self,num):
         '''delete a item from the table'''
-        return self.runQuery("DELETE FROM transactions WHERE rowid = ?",(num,))
-    
+        return self.run_query("DELETE FROM transactions WHERE rowid = ?",(num,))
+
     def summarize_by_day(self,day):
         '''summarize the transactions by date'''
-        return self.runQuery("SELECT rowid,* FROM transactions WHERE STRFTIME('%d', date) = ?",(day,))
-    
+        return self.run_query("SELECT rowid,* FROM transactions WHERE STRFTIME('%d', date) = ?",
+                             (day,))
+
     def summarize_by_month(self,month):
         '''summarize the transactions by month'''
-        return self.runQuery("SELECT rowid,* FROM transactions WHERE STRFTIME('%m', date) = ?",(month,))
-    
+        return self.run_query("SELECT rowid,* FROM transactions WHERE STRFTIME('%m', date) = ?",
+                             (month,))
+
     def summarize_by_year(self,year):
         '''summarize the transactions by year'''
-        return self.runQuery("SELECT rowid,* FROM transactions WHERE STRFTIME('%Y', date) = ?",(year,))
-    
+        return self.run_query("SELECT rowid,* FROM transactions WHERE STRFTIME('%Y', date) = ?",
+                             (year,))
+
     def summarize_by_category(self,category):
         '''summarize the transactions by category'''
-        return self.runQuery("SELECT rowid,* FROM transactions WHERE category = ?", (category,))
-    
+        return self.run_query("SELECT rowid,* FROM transactions WHERE category = ?", (category,))
+
     def delete_all(self):
         '''delete all items from the table'''
-        return self.runQuery("DELETE FROM transactions", ())
-    
-    def runQuery(self, query, tuple):
+        return self.run_query("DELETE FROM transactions", ())
+
+    def run_query(self, query, tup):
+        ''' run the sql query and return the results as a dictionary.'''
         con = sqlite3.connect(self.db_name)
-        cur = con.cursor() 
-        cur.execute(query, tuple)
+        cur = con.cursor()
+        cur.execute(query, tup)
         tuples = cur.fetchall()
         con.commit()
         con.close()
-        return [toDict(t) for t in tuples]
+        return [to_dict(t) for t in tuples]
 
     # def runQuery(self,query,tuple):
     #     ''' return all of the uncompleted tasks as a list of dicts.'''
     #     con= sqlite3.connect('transaction.db')
-    #     cur = con.cursor() 
+    #     cur = con.cursor()
     #     cur.execute(query,tuple)
     #     tuples = cur.fetchall()
     #     con.commit()
     #     con.close()
     #     return [toDict(t) for t in tuples]
-
-
