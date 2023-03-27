@@ -3,6 +3,8 @@ import sqlite3
 import os
 from transaction import Transaction
 
+'''author: Emma Barash
+This class tests the database methods in transaction.py by creating a test database connected to sql and making calls to the transaction.py class'''
 # Test the Transaction class
 class TestTransaction:
 
