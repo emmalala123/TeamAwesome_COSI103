@@ -62,13 +62,3 @@ class Transaction():
         con.commit()
         con.close()
         return [to_dict(t) for t in tuples]
-
-    # def runQuery(self,query,tuple):
-    #     ''' return all of the uncompleted tasks as a list of dicts.'''
-    #     con= sqlite3.connect('transaction.db')
-    #     cur = con.cursor()
-    #     cur.execute(query,tuple)
-    #     tuples = cur.fetchall()
-    #     con.commit()
-    #     con.close()
-    #     return [toDict(t) for t in tuples]
