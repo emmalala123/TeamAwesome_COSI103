@@ -1,4 +1,4 @@
-Hi everyone, we are Team 42 in COSI 103a Software Entrepreneurship and this is our submission for PA3. Our team is Nina Zhang, Emma Barash, James Wang, and William Messenger. In this transcript, we will be showing the result of running pylint and pytest on our code and demonstrating the functionality of our application.
+Hi everyone, we are Team 42 in COSI 103a Software Entrepreneurship and this is our submission for PA3. In this transcript, we will be showing the result of running pylint and pytest on our code and demonstrating the functionality of our application.
 
 Our team used pylint to ensure that our code has no errors and complies with Python standards. The following is the result of running pylint on tracker.py:
 
