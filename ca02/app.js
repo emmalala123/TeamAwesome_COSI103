@@ -106,6 +106,13 @@ app.get('/about',
   }
 )
 
+app.get('/ourTeam', 
+  isLoggedIn,
+  (req,res,next) => {
+    res.render('ourTeam');
+  }
+)
+
 app.use(toDoRouter);
 app.use(weatherRouter);
 
