@@ -43,7 +43,8 @@ router.post('/willsPage',
   async (req, res, next) => {
     const gptResponse = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: req.body.prompt,
+        prompt: "Write the python code for the following game: " + req.body.prompt,
+        max_tokens: 2048,
     });
     const response = gptResponse.data.choices[0].text
     res.render('willsPage',{response});
