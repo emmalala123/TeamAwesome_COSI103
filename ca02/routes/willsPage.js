@@ -1,5 +1,5 @@
 /*
-  todo.js -- Router for the ToDoList
+  willsPage.js -- Router for the willsPage
 */
 const express = require('express');
 const router = express.Router();
@@ -14,11 +14,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 
-/*
-this is a very simple server which maintains a key/value
-store using an object where the keys and values are lists of strings
 
-*/
 
 isLoggedIn = (req,res,next) => {
   if (res.locals.loggedIn) {
@@ -28,7 +24,7 @@ isLoggedIn = (req,res,next) => {
   }
 }
 
-// get the value associated to the key
+// generate page before any prompt has been typed
 router.get('/willsPage',
   isLoggedIn,
   async (req, res, next) => {
@@ -37,7 +33,7 @@ router.get('/willsPage',
 });
 
 
-/* add the value in the body to the list associated to the key */
+/* generate the response and render page */
 router.post('/willsPage',
   isLoggedIn,
   async (req, res, next) => {
