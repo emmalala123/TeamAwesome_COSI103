@@ -9,7 +9,11 @@ const toDoRouter = require('./routes/todo');
 const weatherRouter = require('./routes/weather');
 const willsPageRouter = require('./routes/willsPage');
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 const jamesPageRouter = require('./routes/jamesPage');
+=======
+const emmasPageRouter = require('./routes/emmasPage');
+>>>>>>> Stashed changes
 =======
 const emmasPageRouter = require('./routes/emmasPage');
 >>>>>>> Stashed changes
@@ -123,7 +127,11 @@ app.use(toDoRouter);
 app.use(weatherRouter);
 app.use(willsPageRouter);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 app.use(jamesPageRouter);
+=======
+app.use(emmasPageRouter);
+>>>>>>> Stashed changes
 =======
 app.use(emmasPageRouter);
 >>>>>>> Stashed changes
