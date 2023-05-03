@@ -1,41 +1,10 @@
-/* body {
+body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
-} */
-
-
-/*Ocean Blue*/
-
-body {
-  background-color: #43a8c6;   
-  color: #fff;
 }
 
-a {
-  color: #43a8c6;
-}
 
-/*Tangerine*/
-
-h1 {
-  color: #ff7b2a;
-}
-
-h2 {
-  color: #ff7b2a;
-}
-
-.highlight {
-  background-color: #ff7b2a;
-}
-
-/*Navy Blue*/
-
-.nav {
-  background-color: #213d4f;   
-  color: #fff;
-}

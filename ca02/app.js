@@ -8,15 +8,8 @@ const pw_auth_router = require('./routes/pwauth')
 const toDoRouter = require('./routes/todo');
 const weatherRouter = require('./routes/weather');
 const willsPageRouter = require('./routes/willsPage');
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 const jamesPageRouter = require('./routes/jamesPage');
-=======
 const emmasPageRouter = require('./routes/emmasPage');
->>>>>>> Stashed changes
-=======
-const emmasPageRouter = require('./routes/emmasPage');
->>>>>>> Stashed changes
 
 const User = require('./models/User');
 
@@ -126,15 +119,9 @@ app.get('/ourTeam',
 app.use(toDoRouter);
 app.use(weatherRouter);
 app.use(willsPageRouter);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 app.use(jamesPageRouter);
-=======
 app.use(emmasPageRouter);
->>>>>>> Stashed changes
-=======
-app.use(emmasPageRouter);
->>>>>>> Stashed changes
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
