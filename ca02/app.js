@@ -122,6 +122,7 @@ app.use(weatherRouter);
 app.use(willsPageRouter);
 app.use(jamesPageRouter);
 app.use(emmasPageRouter);
+app.use(ninasPageRouter); 
 
 
 // catch 404 and forward to error handler
